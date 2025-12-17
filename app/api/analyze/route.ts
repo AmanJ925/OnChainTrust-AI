@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { NextResponse } from 'next/server';
 import { analyzeContractBasics } from '@/lib/blockchain';
 import { analyzeHeuristics } from '@/lib/heuristics';
