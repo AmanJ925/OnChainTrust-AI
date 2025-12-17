@@ -35,7 +35,7 @@ export async function generateRiskExplanation(
     return response.choices[0]?.message?.content?.trim() || "Risk explanation unavailable.";
   } catch (err) {
     console.error("Error generating explanation:", err);
-    return "An error occurred while generating the risk explanation.";
+    return "Automated risk explanation is currently unavailable. Based on the detected signals, users should review the listed risks carefully. This is not financial or security advice.";
   }
 }
 
