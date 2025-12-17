@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import ResultCard from "@/components/ResultCard";
 
 // Type definitions
 interface Risk {
@@ -58,21 +59,6 @@ export default function AnalyzePage() {
       });
   }, [address]);
 
-  // 🔥 Trust score color logic (THIS IS WHAT YOU ASKED)
-  const scoreColor = (score: number) => {
-    if (score >= 80) return "text-green-400";
-    if (score >= 50) return "text-yellow-400";
-    return "text-red-400";
-  };
-
-  // 🎨 Risk badge colors
-  const riskColor = (level: Risk["level"]) =>
-    level === "high"
-      ? "bg-red-500/20 text-red-400 border border-red-500/30"
-      : level === "medium"
-      ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30"
-      : "bg-green-500/20 text-green-400 border border-green-500/30";
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-black font-sans">
       <main className="flex w-full max-w-xl flex-col items-center rounded-xl bg-zinc-950 px-8 py-14 shadow-xl border border-zinc-900">
@@ -90,48 +76,13 @@ export default function AnalyzePage() {
           </div>
         ) : result ? (
           <>
-            {/* Trust Score */}
-            <div className="my-6 flex flex-col items-center">
-              <span className="uppercase tracking-widest text-zinc-400 text-sm">
-                Trust Score
-              </span>
-              <span
-                className={`mt-1 text-[3.5rem] font-extrabold drop-shadow-lg ${scoreColor(
-                  result.trustScore
-                )}`}
-              >
-                {result.trustScore}
-              </span>
-              <span className="mt-2 text-xs text-zinc-500">
-                for {result.address.slice(0, 8)}...
-                {result.address.slice(-5)}
-              </span>
-            </div>
-
-            {/* Risk Badges */}
-            <div className="w-full flex flex-wrap gap-2 justify-center mb-7">
-              {result.risks.map((risk, i) => (
-                <span
-                  key={i}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold ${riskColor(
-                    risk.level
-                  )}`}
-                >
-                  {risk.level.toUpperCase()}
-                </span>
-              ))}
-            </div>
-
-            {/* Explanation */}
-            <div className="w-full">
-              <h3 className="text-lg font-semibold mb-2 text-zinc-100">
-                AI Risk Explanation
-              </h3>
-              <div className="bg-white/5 rounded-xl p-5 text-zinc-300 leading-relaxed border border-zinc-800">
-                {result.explanation}
-              </div>
-            </div>
-
+            {/* Result Card Replaces Details Below */}
+            <ResultCard
+              address={result.address}
+              trustScore={result.trustScore}
+              risks={result.risks}
+              explanation={result.explanation}
+            />
             {/* Back Button */}
             <button
               onClick={() => router.push("/")}

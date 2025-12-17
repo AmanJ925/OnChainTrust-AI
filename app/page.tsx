@@ -1,50 +1,49 @@
 "use client";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import AddressForm from "@/components/AddressForm";
+
+import { useState } from "react";
 
 export default function Home() {
-  const [address, setAddress] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    if (!address.trim()) {
-      setError("Please enter a contract address.");
-      return;
-    }
+  const handleFormSubmit = (formAddress: string) => {
     setLoading(true);
-    router.push(`/analyze?address=${address.trim()}`);
+    router.push(`/analyze?address=${formAddress}`);
   };
 
+  // Modern, visually enhanced SaaS Homepage UI
   return (
-    <div className="flex min-h-screen items-center justify-center bg-black font-sans dark:bg-black">
-      <main className="flex w-full max-w-md flex-col items-center rounded-xl bg-zinc-950 px-8 py-12 shadow-lg">
-        <h1 className="mb-2 text-center text-4xl font-bold tracking-tight text-zinc-50">OnChainTrust AI</h1>
-        <p className="mb-8 text-center text-lg text-zinc-400">AI-powered smart contract trust analysis</p>
-        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-5">
-          <input
-            type="text"
-            className="w-full rounded-lg bg-zinc-900 p-4 text-zinc-200 placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            placeholder="Ethereum contract address"
-            value={address}
-            onChange={e => setAddress(e.target.value)}
-            disabled={loading}
-            autoFocus
-          />
-          {error && (
-            <span className="text-sm text-red-400 w-full text-left">{error}</span>
-          )}
-          <button
-            type="submit"
-            disabled={loading}
-            className="mt-2 w-full rounded-lg bg-blue-600 px-4 py-3 text-base font-semibold text-white transition-colors hover:bg-blue-700 disabled:bg-zinc-700"
-          >
-            {loading ? "Analyzing..." : "Analyze Contract"}
-          </button>
-        </form>
+    <div className="min-h-screen w-full relative flex items-center justify-center font-sans" style={{ background: '#0A0A0B' }}>
+      {/* Abstract Indigo Glow Top-Left */}
+      <div
+        className="pointer-events-none select-none absolute -top-32 -left-32 w-[50vw] h-[50vw] rounded-full"
+        style={{
+          background: 'radial-gradient(circle at 30% 30%, rgba(99,102,241,0.23) 0%, rgba(0,0,0,0) 70%)',
+          filter: 'blur(64px)',
+          zIndex: 1,
+        }}
+        aria-hidden="true"
+      />
+      {/* Abstract Cyan Glow Bottom-Right */}
+      <div
+        className="pointer-events-none select-none absolute -bottom-32 -right-32 w-[45vw] h-[45vw] rounded-full"
+        style={{
+          background: 'radial-gradient(circle at 70% 80%, rgba(34,211,238,0.18) 0%, rgba(0,0,0,0) 74%)',
+          filter: 'blur(88px)',
+          zIndex: 1,
+        }}
+        aria-hidden="true"
+      />
+      <main className="z-10 flex w-full max-w-md flex-col items-center rounded-2xl border border-zinc-800 bg-[#111113]/70 px-8 py-14 shadow-2xl backdrop-blur-md">
+        <h1
+          className="mb-2 text-center text-5xl font-bold tracking-tighter text-zinc-100 bg-gradient-to-r from-indigo-400 via-cyan-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-lg"
+        >
+          OnChainTrust AI
+        </h1>
+        <p className="mb-8 text-center text-lg text-zinc-400 font-medium">AI-powered smart contract trust analysis</p>
+        <AddressForm onSubmit={handleFormSubmit} loading={loading} />
       </main>
     </div>
   );
