@@ -11,25 +11,25 @@ OnChainTrust AI is a blockchain security analysis tool that evaluates Ethereum s
 
 🚀 Features
 
-1) 🔍 Smart Contract Analysis
+1)  Smart Contract Analysis
 
     - Validates Ethereum contract addresses
 
     - Detects contract bytecode & basic activity
 
-2) ⚠️ Risk Heuristics Engine
+2)  Risk Heuristics Engine
 
     - Flags low usage, inactivity, and suspicious patterns
 
-3) 🧠 AI-Generated Explanations
+3)  AI-Generated Explanations
 
     - Converts technical risks into non-technical insights
 
-4) 📊 Trust Score
+4)  Trust Score
 
     - Aggregated score (0–100) indicating contract reliability
 
-5) 🌙 Modern Dark UI
+5)  Modern Dark UI
 
     - Clean, minimal, developer-friendly interface
 
